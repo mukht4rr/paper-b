@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paper B</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        text-align: center;
+        padding: 10px;
+      }
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="imageForm">
+      <label for="imageCount">Number of images</label>
+      <input type="text" id="imageCount" name="imageCount" value="4" />
+      <button type="button" onclick="displayTables()">displayImages</button>
+    </form>
+
+    <h2>Images</h2>
+    <p id="errorMessage" class="error" style="display: none">Invalid value</p>
+    <div id="imageTable"></div>
+
+    <script>
+      function displayTables() {
+        const input = document.getElementById("imageCount").value;
+        const numImages = parseInt(input);
+
+        if (numImages % 2 !== 0) {
+          document.getElementById("errorMessage").style.display = "block";
+          document.getElementById("imageTable").innerHTML = "";
+        } else {
+          document.getElementById("errorMessage").style.display = "none";
+          const table = document.createElement("table");
+          let count = 1;
+
+          for (let i = 0; i < numImages / 2; i++) {
+            const row = document.createElement("tr");
+
+            for (let j = 0; j < 2; j++) {
+              const cell = document.createElement("td");
+              const img = document.createElement("img");
+              img.src = `college${count}.jpg`;
+              cell.appendChild(img);
+              row.appendChild(cell);
+              count++;
+            }
+
+            table.appendChild(row);
+          }
+
+          document.getElementById("imageTable").innerHTML = "";
+          document.getElementById("imageTable").appendChild(table);
+        }
+      }
+    </script>
+  </body>
+</html>
